@@ -37,3 +37,4 @@ Clients.json
 #.env
 *.env
 /postgres_data
+/mongo_data
