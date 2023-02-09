@@ -1,7 +1,9 @@
-import { Injectable ,HttpStatus ,HttpException} from '@nestjs/common';
+import { Injectable ,HttpStatus ,HttpException , NotFoundException} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Items } from './entities/items.entity';
+import { CreateItemDto } from './dtos/createItem.dto';
+import { UpdateItemDto } from './dtos/updateItem.dto';
 
 
 @Injectable()
@@ -20,6 +22,25 @@ export class ItemsService {
         };
 
         return item;
+    }
+
+    async create(myItem: CreateItemDto) {
+        const newItem = new this.itemModel(myItem);
+        const aItem = await this.itemModel.findOne(myItem).exec();
+        console.log(!aItem);
+
+        if (aItem) {
+            throw new HttpException("this user already have photo , may be you want to update ", HttpStatus.FOUND);
+        }
+        return newItem.save();
+    }
+
+    async update(idNumber: number, changes: UpdateItemDto) {
+
+    }
+
+    async remove(idUser: number , idItem: string) {
+        return this.itemModel.remove({idUser:idUser , _id:idItem });
     }
 
 }

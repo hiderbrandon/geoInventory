@@ -7,6 +7,7 @@ import config from './config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -16,7 +17,7 @@ import { ItemsModule } from './items/items.module';
       load: [config],
       isGlobal: true,
     }),
-    ItemsModule,MongoModule],
+    ItemsModule,MongoModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

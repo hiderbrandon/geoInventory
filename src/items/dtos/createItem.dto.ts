@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty, IsInt } from 'class-validator';
 
 
-export class CreatePhotoDto {
+export class CreateItemDto {
     @IsString()
     image: string;
     @IsInt()
@@ -15,4 +15,6 @@ export class CreatePhotoDto {
     idUser: number;
     @IsString()
     idType: string;
+    @IsString()
+    name: string;
 }
