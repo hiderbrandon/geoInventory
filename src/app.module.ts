@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
 import { AuthModule } from './auth/auth.module';
+import { UserDataBaseModule } from './user-data-base/user-data-base.module';
 
 
 @Module({
@@ -17,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
       load: [config],
       isGlobal: true,
     }),
-    ItemsModule,MongoModule, AuthModule],
+    ItemsModule,MongoModule, AuthModule, UserDataBaseModule],
   controllers: [AppController],
   providers: [AppService],
 })
