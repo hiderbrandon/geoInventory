@@ -1,10 +1,10 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn,PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class User {
     @PrimaryColumn({ type: `varchar`, length: 2 })
     type: `op` | `ad` ;
-    @PrimaryColumn({ type: `int`, unique: true })
+    @PrimaryGeneratedColumn({ type: `int` })
     id: number;
     @Column({ type: `varchar`, length: 255 })
     Name: string;
