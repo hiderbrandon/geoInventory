@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
 import { AuthModule } from './auth/auth.module';
 import { UserDataBaseModule } from './user-data-base/user-data-base.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -18,7 +19,7 @@ import { UserDataBaseModule } from './user-data-base/user-data-base.module';
       load: [config],
       isGlobal: true,
     }),
-    ItemsModule,MongoModule, AuthModule, UserDataBaseModule],
+    ItemsModule,MongoModule, AuthModule, UserDataBaseModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
