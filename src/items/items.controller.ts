@@ -4,10 +4,10 @@ import { CreateItemDto } from './dtos/createItem.dto';
 import { UpdateItemDto } from './dtos/updateItem.dto';
 import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 import { Public } from 'src/auth/decorators/public.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 
-
-@UseGuards(ApiKeyGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('items')
 export class ItemsController {
     constructor(private readonly itemsService: ItemsService) { };

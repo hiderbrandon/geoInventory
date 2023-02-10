@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException ,HttpException , HttpStatus} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from "bcrypt";
+
 import { User } from '../entities/user.entity';
 import { Repository } from "typeorm";
 import { CreateUserDto } from '../dtos/createUser.Dto';
@@ -23,6 +25,14 @@ export class UsersService {
 
         return anUser ;
     };
+    findOnebyEmail(email : string){
+        const anUser = this.userRepository.findOneBy({email:email} );
+        if (!anUser){
+            throw new NotFoundException(`User not found`);
+        };
+
+        return anUser ;
+    };
 
     findOnebyBossId(id : number){
         const anUser = this.userRepository.findOneBy({idBoss:id} );
@@ -35,9 +45,10 @@ export class UsersService {
     
     async create(anUser: CreateUserDto) {
         const myUser = await this.userRepository.findOneBy(anUser);
-
         if (!myUser) {
             const newClient = this.userRepository.create(anUser);
+            const hashedPassword = await bcrypt.hash(newClient.password , 10 );
+            newClient.password = hashedPassword; 
             return this.userRepository.save(newClient);
         }
         else {
