@@ -12,11 +12,13 @@ export class User {
     id: number;
 
     @Column({ type: `varchar`, length: 255 })
-    Name: string;
+    name: string;
+    @Column({ type: `varchar`, length: 255 })
+    email: string;
 
     @Exclude()
     @Column({ type: 'varchar', length: 255 })
-    Password: string; // must be encrypted
+    password: string; // must be encrypted
 
     @Column({ type: `int` ,  nullable: true })
     idBoss: number | null ;

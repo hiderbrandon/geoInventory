@@ -12,9 +12,9 @@ export class AuthService {
         private usersService :UsersService,
         private jwtService:JwtService){}
 
-    async validateUser(id: number , password: string){
-        const user = await this.usersService.findOnebyId(id);
-        const isMatch = await bcrypt.compare(password ,  user.Password );
+    async validateUser(email: string , password: string){
+        const user = await this.usersService.findOnebyEmail(email);
+        const isMatch = await bcrypt.compare(password ,  user.password );
         if(user && isMatch){
             return user;
         }
@@ -24,8 +24,10 @@ export class AuthService {
 
     generateJWT( user : User){
         const payload :PayloadToken= {role: user.type , sub: user.id};
-        return { acces_token: this.jwtService.sign(payload),
-        user}
+        return { 
+            access_token: this.jwtService.sign(payload),
+            user
+        }
     }
 
 }

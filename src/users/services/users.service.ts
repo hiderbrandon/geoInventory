@@ -25,6 +25,14 @@ export class UsersService {
 
         return anUser ;
     };
+    findOnebyEmail(email : string){
+        const anUser = this.userRepository.findOneBy({email:email} );
+        if (!anUser){
+            throw new NotFoundException(`User not found`);
+        };
+
+        return anUser ;
+    };
 
     findOnebyBossId(id : number){
         const anUser = this.userRepository.findOneBy({idBoss:id} );
@@ -39,8 +47,8 @@ export class UsersService {
         const myUser = await this.userRepository.findOneBy(anUser);
         if (!myUser) {
             const newClient = this.userRepository.create(anUser);
-            const hashedPassword = await bcrypt.hash(newClient.Password , 10 );
-            newClient.Password = hashedPassword; 
+            const hashedPassword = await bcrypt.hash(newClient.password , 10 );
+            newClient.password = hashedPassword; 
             return this.userRepository.save(newClient);
         }
         else {

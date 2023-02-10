@@ -19,5 +19,6 @@ export default registerAs(`config`, () => {
             password: process.env.MONGO_INITDB_ROOT_PASSWORD,
         },
         apiKey: process.env.API_KEY,
+        jwtSecret: process.env.JWT_SECRET
     }
 })
