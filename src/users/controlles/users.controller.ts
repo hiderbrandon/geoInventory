@@ -2,10 +2,11 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuard
 import { UsersService } from '../services/users.service';
 import { UpdateUserDto } from '../dtos/updateUser.Dto';
 import { CreateUserDto } from '../dtos/createUser.Dto';
-import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 import { Public } from 'src/auth/decorators/public.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@UseGuards(ApiKeyGuard)
+
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
@@ -21,11 +22,12 @@ export class UsersController {
         return this.userService.findOnebyId(id);
     };
 
-    @Post(`/`)
+    @Public()
+    @Post(`signup`)
     create(@Body() payload: CreateUserDto) {
         return this.userService.create(payload);
     }
-
+ 
     @Put(`:idNumber`)
     update(@Param(`idNumber`) idnumber: number,@Body() payload: UpdateUserDto) {
         return this.userService.update(idnumber, payload);
