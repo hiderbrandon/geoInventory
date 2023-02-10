@@ -17,6 +17,7 @@ export default registerAs(`config`, () => {
             port: parseInt(process.env.MONGO_PORT, 10),
             connection: process.env.MONGO_CONNECTION,
             password: process.env.MONGO_INITDB_ROOT_PASSWORD,
-        }
+        },
+        apiKey: process.env.API_KEY,
     }
 })

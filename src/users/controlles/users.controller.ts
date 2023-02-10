@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UpdateUserDto } from '../dtos/updateUser.Dto';
 import { CreateUserDto } from '../dtos/createUser.Dto';
+import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
+import { Public } from 'src/auth/decorators/public.decorator';
 
+@UseGuards(ApiKeyGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
