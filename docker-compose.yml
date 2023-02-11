@@ -1,16 +1,22 @@
-version: "3.3"
+version: "3"
 
-services :
+services:
+  app:
+    image: public.ecr.aws/z9w6k4q4/inventory:1
+    depends_on:
+      - mongo
+      - postgres
+    ports: 
+      - 3001:3001
+    restart: always
   mongo:
     image: mongo:4.4
     environment:
       - MONGO_INITDB_DATABASE=geoInventario
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-    ports:
-      - "${MONGO_PORT}:27017"
-    volumes:
-      - ./mongo_data:/data/db
+ #   ports:
+ #     - "${MONGO_PORT}:27017"
   postgres:
     image: postgres:13
     environment:
@@ -19,12 +25,10 @@ services :
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "${POSTGRES_PORT}:5432"
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    ports:
-      - "${PGADMIN_PORT}:80"
+  #  ports:
+  #    - "${PGADMIN_PORT}:80"
