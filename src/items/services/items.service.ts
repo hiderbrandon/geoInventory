@@ -1,9 +1,10 @@
 import { Injectable ,HttpStatus ,HttpException , NotFoundException} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Items } from './entities/items.entity';
-import { CreateItemDto } from './dtos/createItem.dto';
-import { UpdateItemDto } from './dtos/updateItem.dto';
+
+import { Items } from '../entities/items.entity';
+import { CreateItemDto } from '../dtos/createItem.dto';
+import { UpdateItemDto } from '../dtos/updateItem.dto';
 
 
 @Injectable()
