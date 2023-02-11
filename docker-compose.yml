@@ -2,12 +2,12 @@ version: "3"
 
 services:
   app:
-    image: public.ecr.aws/z9w6k4q4/inventory:1
+    image: build .
     depends_on:
       - mongo
       - postgres
     ports: 
-      - 3001:3001
+      - 80:3001
     restart: always
   mongo:
     image: mongo:4.4
