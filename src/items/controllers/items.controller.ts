@@ -31,9 +31,15 @@ export class ItemsController {
         return this.itemsService.create(payload);
     };
 
-    @Delete(`:idNumber/:idType`)
-    delete(@Param(`idNumber`) idNumber: number, @Param(`idType`) idItem: string) {
-        this.itemsService.remove(idNumber, idItem)
+    @Put()
+    update(@Param(`idNumber`) idNumber: number,
+            @Body() payload: UpdateItemDto) {
+        return this.itemsService.update(idNumber,payload);
+    };
+
+    @Delete(`:idItem`)
+    delete(@Param(`idItem`) idItem: string) {
+        this.itemsService.remove(idItem)
     };
 }
 

@@ -31,17 +31,17 @@ export class ItemsService {
         console.log(!aItem);
 
         if (aItem) {
-            throw new HttpException("this user already have photo , may be you want to update ", HttpStatus.FOUND);
+            throw new HttpException("this user already exist , may be you want to update ", HttpStatus.FOUND);
         }
         return newItem.save();
     }
 
     async update(idNumber: number, changes: UpdateItemDto) {
-
+        return  this.itemModel.findByIdAndUpdate( idNumber , changes);
     }
 
-    async remove(idUser: number , idItem: string) {
-        return this.itemModel.remove({idUser:idUser , _id:idItem });
+    async remove(idItem: string) {
+        return this.itemModel.findByIdAndDelete(idItem);
     }
 
 }
