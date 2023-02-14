@@ -31,8 +31,8 @@ export class ItemsController {
         return this.itemsService.create(payload);
     };
 
-    @Put()
-    update(@Param(`:idNumber`) idNumber: string,
+    @Put(`:idNumber`)
+    update(@Param(`idNumber`) idNumber: string,
             @Body() payload: UpdateItemDto) {
         return this.itemsService.update(idNumber,payload);
     };
