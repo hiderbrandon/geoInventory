@@ -32,7 +32,7 @@ export class ItemsController {
     };
 
     @Put()
-    update(@Param(`:idNumber`) idNumber: number,
+    update(@Param(`:idNumber`) idNumber: string,
             @Body() payload: UpdateItemDto) {
         return this.itemsService.update(idNumber,payload);
     };

@@ -36,7 +36,7 @@ export class ItemsService {
         return newItem.save();
     }
 
-    async update(idNumber: number, changes: UpdateItemDto) {
+    async update(idNumber: string, changes: UpdateItemDto) {
         return  this.itemModel.findByIdAndUpdate( idNumber , changes);
     }
 
