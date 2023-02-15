@@ -16,6 +16,10 @@ export class ItemsService {
         return this.itemModel.find().exec();
     }
 
+    findByUserID(userId : number){
+        return this.itemModel.find({userId:userId}).exec();
+    }
+
     async findOne(id: number){
         const item =  this.itemModel.findOne({idUser:id} ).exec();
         if(!item){

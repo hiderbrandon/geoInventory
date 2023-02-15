@@ -21,9 +21,9 @@ export class ItemsController {
 
     @Public()
     @Get(`:myId`)
-    getOneItem(
+    getbyId(
         @Param(`myId`) myId: number) {
-        return this.itemsService.findOne(myId);
+        return this.itemsService.findByUserID(myId);
     }
 
     @Post()
