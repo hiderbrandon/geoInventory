@@ -23,7 +23,7 @@ export class ItemsService {
     async findOne(id: number){
         const item =  this.itemModel.findOne({idUser:id} ).exec();
         if(!item){
-            throw new HttpException("this user doesn't haveinventory items yet", HttpStatus.NOT_FOUND);
+            throw new HttpException("this user doesn't have inventory items yet", HttpStatus.NOT_FOUND);
         };
 
         return item;
@@ -41,7 +41,12 @@ export class ItemsService {
     }
 
     async update(idNumber: number, changes: UpdateItemDto) {
-        return  this.itemModel.findByIdAndUpdate( idNumber , changes);
+        const update = this.itemModel.findByIdAndUpdate( idNumber , changes);
+        if (!update) {
+            throw new HttpException("item not found  ", HttpStatus.NOT_FOUND);
+        }
+
+        return update;
     }
 
     async remove(idItem: string) {
