@@ -45,7 +45,12 @@ export class ItemsService {
     }
 
     async remove(idItem: string) {
-        return this.itemModel.findByIdAndDelete(idItem);
-    }
+        const erased =  this.itemModel.findByIdAndDelete(idItem);
+        if (!erased) {
+            throw new HttpException("item not found  ", HttpStatus.NOT_FOUND);
+        }
+
+        return erased;
+      }
 
 }

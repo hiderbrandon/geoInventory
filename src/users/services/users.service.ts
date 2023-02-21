@@ -74,5 +74,6 @@ export class UsersService {
             throw new NotFoundException(`Client doesn't exist`);
         }
         this.userRepository.delete({ id: idNumber });
+        return HttpStatus.NO_CONTENT ;
     };
 }
